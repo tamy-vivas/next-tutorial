@@ -24,7 +24,7 @@ export const getStaticPaths = async () => {
  * @returns props JSON objet
  */
 export const getStaticProps = async ({ params: { slug } }) => {
-  console.log("[firstPostPage] getStaticProps");
+  //console.log("[firstPostPage] getStaticProps");
   const post = await getPost(slug);
 
   return {
@@ -35,7 +35,7 @@ export const getStaticProps = async ({ params: { slug } }) => {
 };
 
 const PostPage = ({ post }) => {
-  console.log("[PostPage render:", post);
+  //console.log("[PostPage render:", post);
   return (
     <>
       <Head>

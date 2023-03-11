@@ -8,7 +8,6 @@ import { getPosts } from "../lib/posts";
  */
 export const getStaticProps = async () => {
   const posts = await getPosts();
-  console.log(posts);
   return {
     props: {
       posts,
@@ -17,7 +16,7 @@ export const getStaticProps = async () => {
 };
 
 function HomePage({ posts }) {
-  console.log("HomePage");
+  //console.log("HomePage");
   return (
     <>
       <Head>
