@@ -1,6 +1,22 @@
 import Head from "next/head";
 import Link from "next/link";
-function HomePage() {
+import { getPosts } from "../lib/posts";
+
+/**
+ * This code only runs on the server
+ * @returns props JSON objet
+ */
+export const getStaticProps = async () => {
+  const posts = await getPosts();
+  console.log(posts);
+  return {
+    props: {
+      posts,
+    },
+  };
+};
+
+function HomePage({ posts }) {
   console.log("HomePage");
   return (
     <>
@@ -10,9 +26,11 @@ function HomePage() {
       <main>
         <h1>HomePage</h1>
         <ul>
-          <li>
-            <Link href="post/first-post">First Page</Link>
-          </li>
+          {posts.map((post) => (
+            <li key={post.slug}>
+              <Link href={`/post/${post.slug}`}>{post.title}</Link>
+            </li>
+          ))}
         </ul>
       </main>
     </>

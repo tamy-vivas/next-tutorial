@@ -1,16 +1,20 @@
 import Head from "next/head";
-import { getPost } from "../../lib/posts";
+import { getPost, getSlugs } from "../../lib/posts";
 
 /**
  * needed by Next to define dinamic routes
  * @returns dinamic router paths
  */
 export const getStaticPaths = async () => {
+  const slugs = await getSlugs();
   return {
-    paths: [
-      { params: { slug: "first-post" } },
-      { params: { slug: "second-post" } },
-    ],
+    paths: slugs.map((slug) => ({
+      params: { slug },
+    })),
+    // paths: [
+    //   { params: { slug: "first-post" } },
+    //   { params: { slug: "second-post" } },
+    // ],
     fallback: false,
   };
 };
