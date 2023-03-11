@@ -24,6 +24,7 @@ const firstPostPage = ({ post }) => {
         <title>My Blog - {post.title}</title>
       </Head>
       <main>
+        <p>{post.date}</p>
         <h1>{post.title}</h1>
         <article dangerouslySetInnerHTML={{ __html: post.body }} />
       </main>
