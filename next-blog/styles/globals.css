@@ -12,16 +12,16 @@ a:focus, a:hover{
     text-decoration: underline;
 }
 
-ul{
+/* .NavBar ul{
     list-style-type: none;
     padding: 0;
 }
 
-li{
+.NavBar li{
     display: inline;
 }
 
-li:not(:first-child){
+.NavBar li:not(:first-child){
     margin-left: 0.75rem;
 
-}
+} */
