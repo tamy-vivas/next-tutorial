@@ -1,18 +1,17 @@
-import Link from "next/link";
 import { NavBar } from "../components/NavBar";
 
-function HomePage() {
-  console.log("HomePage");
+function AboutPage() {
+  console.log("AboutPage");
   return (
     <>
       <header>
         <NavBar />
         <main>
-          <h1>HomePage</h1>
+          <h1>AboutPage</h1>
         </main>
       </header>
     </>
   );
 }
 
-export default HomePage;
+export default AboutPage;
