@@ -4,12 +4,6 @@
     --text-color: black;
 }
 
-:root{
-    --background-color: black;
-    --link-color: rgba(255, 123, 0, 0.771);
-    --text-color: white;
-}
-
 body{
     font-family: Arial, Helvetica, sans-serif;
     background-color: var(--background-color);

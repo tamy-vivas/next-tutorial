@@ -1,4 +1,5 @@
 import { useState } from "react";
+import DarkTheme from "./DarkTheme";
 
 const ThemeSwitch = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -15,6 +16,8 @@ const ThemeSwitch = () => {
           color: inherit;
         }
       `}</style>
+
+      {darkMode && <DarkTheme />}
     </>
   );
 };
