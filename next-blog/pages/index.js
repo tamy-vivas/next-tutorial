@@ -6,7 +6,6 @@ function HomePage() {
     <>
       <Head>
         <title>Mly Blog</title>
-        <meta name="description" value="This is my blog" />
       </Head>
       <main>
         <h1>HomePage</h1>

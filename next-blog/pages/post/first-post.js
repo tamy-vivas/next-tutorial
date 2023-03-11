@@ -17,7 +17,7 @@ export const getStaticProps = async () => {
 };
 
 const firstPostPage = ({ post }) => {
-  console.log("[firstPostPage redner:", post);
+  console.log("[firstPostPage render:", post);
   return (
     <>
       <Head>
@@ -25,7 +25,7 @@ const firstPostPage = ({ post }) => {
       </Head>
       <main>
         <h1>{post.title}</h1>
-        <p>{post.body}</p>
+        <article dangerouslySetInnerHTML={{ __html: post.body }} />
       </main>
     </>
   );
