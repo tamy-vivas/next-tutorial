@@ -5,14 +5,14 @@ function HomePage() {
   return (
     <>
       <Head>
-        <title>Mly Blog</title>
+        <title>My Blog</title>
       </Head>
       <main>
         <h1>HomePage</h1>
         <ul>
-          <il>
+          <li>
             <Link href="post/first-post">First Page</Link>
-          </il>
+          </li>
         </ul>
       </main>
     </>

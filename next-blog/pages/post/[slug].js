@@ -2,12 +2,26 @@ import Head from "next/head";
 import { getPost } from "../../lib/posts";
 
 /**
+ * needed by Next to define dinamic routes
+ * @returns dinamic router paths
+ */
+export const getStaticPaths = async () => {
+  return {
+    paths: [
+      { params: { slug: "first-post" } },
+      { params: { slug: "second-post" } },
+    ],
+    fallback: false,
+  };
+};
+
+/**
  * This code only runs on the server
  * @returns props JSON objet
  */
-export const getStaticProps = async () => {
+export const getStaticProps = async ({ params: { slug } }) => {
   console.log("[firstPostPage] getStaticProps");
-  const post = await getPost("first-post");
+  const post = await getPost(slug);
 
   return {
     props: {
@@ -16,8 +30,8 @@ export const getStaticProps = async () => {
   };
 };
 
-const firstPostPage = ({ post }) => {
-  console.log("[firstPostPage render:", post);
+const PostPage = ({ post }) => {
+  console.log("[PostPage render:", post);
   return (
     <>
       <Head>
@@ -32,4 +46,4 @@ const firstPostPage = ({ post }) => {
   );
 };
 
-export default firstPostPage;
+export default PostPage;
