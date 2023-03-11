@@ -1,4 +1,5 @@
 import { NavBar } from "../components/NavBar";
+import "../styles/globals.css";
 
 /**
  * It needs to export default component
