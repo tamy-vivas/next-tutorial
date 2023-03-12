@@ -17,6 +17,9 @@ const ThemeSwitch = () => {
   };
 
   const text = darkMode ? "Light Mode" : "Dark Mode";
+  //suppressHydrationWarning, is needed because at the begining the component is render with false
+  // but after that loadDarkMode change the state, so Next tries to hydrate the component dark with a button
+  // with discrepancy
   return (
     <>
       <button onClick={handelClick} suppressHydrationWarning>
