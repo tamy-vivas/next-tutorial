@@ -37,4 +37,15 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-In DEV mode there is no difference between ISR, SSR or Client side rendering
+## In DEV mode there is no difference between ISR, SSR or Client side rendering
+
+## Fetching Data NEXTJS
+
+................-yes-> Can the-------No-> Static Generation
+.......................data change?--yes-> Incremental Static Generation
+Same
+data
+for
+all users?
+................-No-> API accessible -yes-> Client-side from external API
+......................from browsers? -No-> Client-side Via API Route
