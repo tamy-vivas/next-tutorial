@@ -6,11 +6,11 @@ import Title from '../components/Title';
 import { Product, getProducts } from '../lib/product';
 
 
-const Home = () => {
+const Home: React.FC = () => {
 
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<Product[]>([]);
   useEffect(() => {
-    //getProducts().then((products)=> setProducts(products));
+    //getProducts().then((products: Product[]) => setProducts(products));
     getProducts().then(setProducts);
   }, [])
 

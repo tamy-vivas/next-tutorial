@@ -24,20 +24,21 @@ export const getStaticPaths: GetStaticPaths<ProductPageParams> = async () => {
 }
 
 
-export const getStaticProps: GetStaticProps<ProductPageProps, ProductPageParams> = async ({ params: { id } }) => {
-  console.log('[ProductPage] getStaticProps');
-
+export const getStaticProps: GetStaticProps<ProductPageProps, ProductPageParams> = async ({ params }) => {
+  const id = params?.id;
+  if (!id) {
+    throw new Error('id not set');
+  }
   const product = await getProduct(id);
   return {
     props: { product },
-    revalidate: 30, //seconds
-  }
-}
-
+    //revalidate: 30, //seconds. Not needed because revalidate webhook
+  };
+};
 
 
 const ProductPage: React.FC<ProductPageProps> = ({ product }) => {
-  console.log('[ProductPage] render: ', product);
+  //console.log('[ProductPage] render: ', product);
   return (
     <>
       <Head>
