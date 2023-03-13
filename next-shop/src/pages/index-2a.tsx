@@ -4,26 +4,16 @@ import { useEffect, useState } from 'react';
 import Title from '../components/Title';
 import { Product, getProducts } from '../lib/product';
 
-
-export const getStaticProps = async () => {
-  console.log('[HomePage] getStaticProps');
-
-  const products = await getProducts();
-  return {
-    props: { products }
-  }
-}
-
-interface HomePageProps {
-  products: Product[];
-}
-
-const Home: React.FC<HomePageProps> = () => {
+const Home = () => {
 
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    //getProducts().then((products)=> setProducts(products));
-    getProducts().then(setProducts);
+    (async () => {
+      const response = await fetch('/api/products');
+      const products = await response.json();
+      setProducts(products);
+
+    })();
   }, [])
 
 
