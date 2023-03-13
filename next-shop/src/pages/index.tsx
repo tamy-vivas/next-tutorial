@@ -1,8 +1,12 @@
 import Head from 'next/head'
-import { Inter } from 'next/font/google'
 import Title from '../components/Title';
 
-const inter = Inter({ subsets: ['latin'] })
+
+
+const products = [
+  { id: 1, title: 'First Product' },
+  { id: 2, title: 'Second Product' },
+]
 
 export default function Home() {
   return (
@@ -13,6 +17,11 @@ export default function Home() {
       </Head>
       <main className="px-6 py-4">
         <Title>Next Shop</Title>
+        <ul>
+          {
+            products.map((product) => (<li key={product.id}>{product.title}</li>))
+          }
+        </ul>
       </main>
     </>
   )
