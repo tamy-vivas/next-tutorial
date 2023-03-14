@@ -19,39 +19,38 @@ export const getStaticPaths: GetStaticPaths<ProductPageParams> = async () => {
     paths: products.map((product: Product) => ({
       params: { id: product.id.toString() }
     })),
-    fallback: false,
+    fallback: 'blocking', //Fallback tells the server what should do when the page does not exist. False page 404 not found. 'blocking' next generate the page while the client is waiting for the response
   }
-}
 
 
-export const getStaticProps: GetStaticProps<ProductPageProps, ProductPageParams> = async ({ params }) => {
-  const id = params?.id;
-  if (!id) {
-    throw new Error('id not set');
-  }
-  const product = await getProduct(id);
-  return {
-    props: { product },
-    //revalidate: 30, //seconds. Not needed because revalidate webhook
+  export const getStaticProps: GetStaticProps<ProductPageProps, ProductPageParams> = async ({ params }) => {
+    const id = params?.id;
+    if (!id) {
+      throw new Error('id not set');
+    }
+    const product = await getProduct(id);
+    return {
+      props: { product },
+      //revalidate: 30, //seconds. Not needed because revalidate webhook
+    };
   };
-};
 
 
-const ProductPage: React.FC<ProductPageProps> = ({ product }) => {
-  //console.log('[ProductPage] render: ', product);
-  return (
-    <>
-      <Head>
-        <title>Next Shop</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <main className="px-6 py-4">
-        <Title>{product.title}</Title>
-        <p>{product.description}</p>
+  const ProductPage: React.FC<ProductPageProps> = ({ product }) => {
+    //console.log('[ProductPage] render: ', product);
+    return (
+      <>
+        <Head>
+          <title>Next Shop</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <main className="px-6 py-4">
+          <Title>{product.title}</Title>
+          <p>{product.description}</p>
 
-      </main>
-    </>
-  )
-}
+        </main>
+      </>
+    )
+  }
 
-export default ProductPage;
+  export default ProductPage;

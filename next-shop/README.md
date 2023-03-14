@@ -49,3 +49,7 @@ for
 all users?
 ................-No-> API accessible -yes-> Client-side from external API
 ......................from browsers? -No-> Client-side Via API Route
+
+## Revalidation
+
+Only suports if the CMS has webhooks.
