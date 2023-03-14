@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { ParsedUrlQuery } from 'querystring';
 import Title from '../../components/Title';
 import { Product, getProducts, getProduct } from '../../lib/product';
+import { ApiError } from '../../lib/api';
 
 interface ProductPageParams extends ParsedUrlQuery {
   id: string;
@@ -36,7 +37,11 @@ export const getStaticProps: GetStaticProps<ProductPageProps, ProductPageParams>
       //revalidate: 30, //seconds. Not needed because revalidate webhook
     };
   } catch (error) {
-    return { notFound: true }
+    if (error instanceof ApiError && error.status === 404) {
+      return { notFound: true }
+
+    }
+    throw error
   }
 
 };
