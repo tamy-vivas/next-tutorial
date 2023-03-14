@@ -3,15 +3,21 @@ import Input from '../components/Input';
 import Field from '../components/Field';
 import Button from '../components/Button';
 import { FormEventHandler, useState } from 'react';
+import { fetchJson } from '../lib/api';
 
 const SignInPage: React.FC = () => {
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('alice@example.com');
+    const [password, setPassword] = useState('Alice123');
 
-    const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
+    const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
         event.preventDefault();
-        console.log('should submit', { email, password });
+        const response = await fetchJson('http://localhost:1337/auth/local', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ identifier: email, password }),
+        });
+        console.log('should submit', { email, password }, response);
     }
 
     return (
@@ -24,7 +30,8 @@ const SignInPage: React.FC = () => {
                 </Field>
 
                 <Field label="Password">
-                    <Input type="password" required />
+                    <Input type="password" required value={password}
+                        onChange={(event) => setPassword(event.target.value)} />
                 </Field>
 
                 <Button type="submit">
