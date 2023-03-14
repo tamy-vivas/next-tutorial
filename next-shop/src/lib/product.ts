@@ -6,30 +6,18 @@ export interface Product {
   id: number;
   title: string;
   description: string;
-  price?: string;
-  picture?: {
-    name: string;
-    formats: {
-      thumbnail: {
-        url: string;
-      };
-      medium: {
-        url: string;
-      };
-      small: {
-        url: string;
-      };
-    };
-  };
+  price: string;
+  pictureURL: string;
 }
 
 const stripProduct = (product: any): Product => {
-  const { id, title, description, price } = product;
+  const { id, title, description, price, picture } = product;
   return {
     id,
     title,
     description,
-    price: "$ " + product.price.toFixed(2),
+    price: "$ " + price.toFixed(2),
+    pictureURL: CMS_URL + picture.url,
   };
 };
 
