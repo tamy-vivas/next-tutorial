@@ -6,7 +6,7 @@ export interface Product {
   id: number;
   title: string;
   description: string;
-  price?: 7.5;
+  price?: string;
   picture?: {
     name: string;
     formats: {
@@ -24,11 +24,12 @@ export interface Product {
 }
 
 const stripProduct = (product: any): Product => {
-  const { id, title, description } = product;
+  const { id, title, description, price } = product;
   return {
     id,
     title,
     description,
+    price: "$ " + product.price.toFixed(2),
   };
 };
 

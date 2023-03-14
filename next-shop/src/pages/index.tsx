@@ -1,7 +1,7 @@
 //Option 1b: fetch products on the server side 
 //with Incremental Static Regeneration (in getStaticProps)
+import ProductCard from '@/components/ProductCard';
 import Head from 'next/head'
-import Link from 'next/link';
 import Title from '../components/Title';
 import { Product, getProducts } from '../lib/product';
 
@@ -28,15 +28,15 @@ const Home: React.FC<HomePageProps> = ({ products }) => {
         <title>Next Shop</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="px-6 py-4">``
+      <main className="px-6 py-4">
         <Title>Next Shop</Title>
         <ul>
           {
-            products.map((product) => (<li key={product.id}>
-              <Link href={`/products/${product.id}`}>
-                {product.title}
-              </Link>
-            </li>))
+            products.map((product) => (
+              <li key={product.id}>
+                <ProductCard product={product} />
+              </li>
+            ))
           }
         </ul>
       </main>
