@@ -30,6 +30,10 @@ const stripProduct = (product: any): Product => {
 
 export const getProduct = async (id: string): Promise<Product> => {
   const response = await fetch(`http://localhost:1337/products/${id}`);
+  console.log("------------>", response);
+  if (!response.ok) {
+    throw new Error(`request failed: ${response.status}`);
+  }
   const product = await response.json();
 
   return stripProduct(product);
