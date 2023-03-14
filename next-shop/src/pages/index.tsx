@@ -12,7 +12,7 @@ export const getStaticProps = async () => {
   const products = await getProducts();
   return {
     props: { products },
-    revalidate: 30, //seconds
+    revalidate: parseInt(process.env.REVALIDATE_SECONDS || '300'), //seconds
   }
 }
 
@@ -28,7 +28,7 @@ const Home: React.FC<HomePageProps> = ({ products }) => {
         <title>Next Shop</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="px-6 py-4">
+      <main className="px-6 py-4">``
         <Title>Next Shop</Title>
         <ul>
           {
