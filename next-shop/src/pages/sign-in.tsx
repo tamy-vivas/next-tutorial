@@ -33,7 +33,6 @@ const SignInPage: React.FC = () => {
 
     return (
         <Page title="Sign In ">
-
             <form onSubmit={handleSubmit}>
                 <Field label="Email">
                     <Input type="email" required value={email}
@@ -54,9 +53,7 @@ const SignInPage: React.FC = () => {
                             </Button>
                         )
                 }
-
             </form>
-
         </Page>
     )
 }
