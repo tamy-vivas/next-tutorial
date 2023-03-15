@@ -17,7 +17,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
 
     res.status(200).json({
       id: user.id,
-      name: user.name,
+      name: user.username,
     });
   } catch (error) {
     res.status(401).end();

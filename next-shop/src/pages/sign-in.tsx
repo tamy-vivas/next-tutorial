@@ -4,10 +4,11 @@ import Field from '../components/Field';
 import Button from '../components/Button';
 import { FormEventHandler, useState } from 'react';
 import { fetchJson } from '../lib/api';
+import { useRouter } from 'next/router';
 
 
 const SignInPage: React.FC = () => {
-
+    const router = useRouter();
     const [email, setEmail] = useState('alice@example.com');
     const [password, setPassword] = useState('Alice123');
     const [status, setStatus] = useState({ loading: false, error: false });
@@ -24,7 +25,7 @@ const SignInPage: React.FC = () => {
             });
 
             setStatus({ loading: false, error: false });
-
+            router.push('/');
             console.log('should submit', { email, password }, response);
         } catch (error) {
             setStatus({ loading: false, error: true });
