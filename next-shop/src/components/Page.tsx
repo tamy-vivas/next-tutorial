@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { PropsWithChildren } from 'react';
+import NavBar from "./NavBar";
 import Title from "./Title";
 interface PageProps extends PropsWithChildren {
     title: string
@@ -12,6 +13,9 @@ const Page: React.FC<PageProps> = ({ title, children }) => {
                 <title>{title} - Next Shop</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
+            <header>
+                <NavBar />
+            </header>
             <main className="px-6 py-4">
                 <Title>{title}</Title>
                 {children}

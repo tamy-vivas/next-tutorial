@@ -22,13 +22,13 @@ const stripProduct = (product: any): Product => {
 };
 
 export const getProduct = async (id: string): Promise<Product> => {
-  const product = await fetchJson(`${CMS_URL}/products/${id}`, null);
+  const product = await fetchJson(`${CMS_URL}/products/${id}`);
 
   return stripProduct(product);
 };
 
 export const getProducts = async (): Promise<Product[]> => {
-  const products = await fetchJson(`${CMS_URL}/products`, null);
+  const products = await fetchJson(`${CMS_URL}/products`);
 
   return products.map(stripProduct);
 };
