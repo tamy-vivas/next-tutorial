@@ -1,10 +1,9 @@
 import Link from 'next/link'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FormEventHandler } from 'react';
 import { fetchJson } from '../lib/api';
 
-const NavBar = () => {
-
-    const [user, setUser] = useState();
+const NavBar: React.FC = () => {
+    const [user, setUser] = useState({ id: undefined, name: undefined });
 
     useEffect(() => {
         (async () => {
@@ -14,11 +13,14 @@ const NavBar = () => {
             } catch (error) {
                 // not signed in
             }
-
         })();
-
     }, [])
-    console.log('[NavBar] user', user)
+
+
+    const handleSignOut = async () => {
+        await fetchJson('/api/logout');
+        setUser({ id: undefined, name: undefined });
+    };
 
     return (
         <nav className="px-2 py-1">
@@ -34,7 +36,11 @@ const NavBar = () => {
                     (
                         <>
                             <li>{user.name}</li>
-                            <li><button>Sign Out</button></li>
+                            <li>
+                                <button onClick={handleSignOut}>
+                                    Sign Out
+                                </button>
+                            </li>
                         </>
                     ) :
                     (
@@ -44,7 +50,6 @@ const NavBar = () => {
                             </Link>
                         </li>
                     )}
-
             </ul>
         </nav>
     )
