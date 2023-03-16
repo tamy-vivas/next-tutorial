@@ -5,6 +5,7 @@ import Button from '../components/Button';
 import { FormEventHandler, useState } from 'react';
 import { fetchJson } from '../lib/api';
 import { useRouter } from 'next/router';
+import { useMutation } from 'react-query';
 
 
 const SignInPage: React.FC = () => {
@@ -13,22 +14,25 @@ const SignInPage: React.FC = () => {
     const [password, setPassword] = useState('Alice123');
     const [status, setStatus] = useState({ loading: false, error: false });
 
+    const mutation = useMutation(async () =>
+        fetchJson('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+        })
+    );
+
+
     const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
         event.preventDefault();
         setStatus({ loading: true, error: false });
 
         try {
-            const response = await fetchJson('/api/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password }),
-            });
-
-            setStatus({ loading: false, error: false });
+            const user = await mutation.mutateAsync();
+            console.log('signed in:', user);
             router.push('/');
-            console.log('should submit', { email, password }, response);
         } catch (error) {
-            setStatus({ loading: false, error: true });
+            // mutation.isError will be true
         }
     }
 
@@ -44,9 +48,9 @@ const SignInPage: React.FC = () => {
                     <Input type="password" required value={password}
                         onChange={(event) => setPassword(event.target.value)} />
                 </Field>
-                {status.error && <p className="text-red-700">Invalid Credentials</p>}
+                {mutation.isError && <p className="text-red-700">Invalid Credentials</p>}
                 {
-                    status.loading ?
+                    mutation.isLoading ?
                         (<p>Loading...</p>) :
                         (
                             <Button type="submit">
