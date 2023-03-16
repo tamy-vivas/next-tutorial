@@ -1,12 +1,20 @@
 import Page from '../components/Page';
+import { useQuery } from 'react-query';
+import { CartItem } from '../lib/Cart';
+import { fetchJson } from '../lib/api';
+import CartTable from '@/components/CartTable';
 
-const Cart: React.FC = () => {
+const CartPage: React.FC = () => {
+    const query = useQuery<CartItem[]>('cartItems', () => fetchJson('api/cart'));
+    const cartItems = query.data;
+
+    console.log(cartItems)
     return (
         <Page title="Cart">
 
-            <div>Cart</div>
+            {cartItems && <CartTable cartItems={cartItems} />}
         </Page>
     )
 }
 
-export default Cart
+export default CartPage;
