@@ -1,25 +1,25 @@
 import Link from 'next/link'
-import { useState, useEffect, FormEventHandler } from 'react';
+import { useQuery } from 'react-query';
 import { fetchJson } from '../lib/api';
 
 const NavBar: React.FC = () => {
-    const [user, setUser] = useState({ id: undefined, name: undefined });
 
-    useEffect(() => {
-        (async () => {
-            try {
-                const user = await fetchJson('/api/user');
-                setUser(user);
-            } catch (error) {
-                // not signed in
-            }
-        })();
-    }, [])
+    const query = useQuery('user', async () => {
+        try {
+            return await fetchJson('/api/user');
+        } catch (error) {
+            return undefined;
+        }
+    }, {
+        cacheTime: Infinity, // keep cache data forever
+        staleTime: 30_000 //ms data is old after this value and will expire
+    });
 
+    const user = query.data;
 
     const handleSignOut = async () => {
         await fetchJson('/api/logout');
-        setUser({ id: undefined, name: undefined });
+        // setUser({ id: undefined, name: undefined });
     };
 
     return (
