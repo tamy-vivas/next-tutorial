@@ -5,14 +5,14 @@ import Button from '../components/Button';
 import { FormEventHandler, useState } from 'react';
 import { fetchJson } from '../lib/api';
 import { useRouter } from 'next/router';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 
 
 const SignInPage: React.FC = () => {
     const router = useRouter();
     const [email, setEmail] = useState('alice@example.com');
     const [password, setPassword] = useState('Alice123');
-    const [status, setStatus] = useState({ loading: false, error: false });
+    const queryClient = useQueryClient();
 
     const mutation = useMutation(async () =>
         fetchJson('/api/login', {
@@ -25,10 +25,10 @@ const SignInPage: React.FC = () => {
 
     const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
         event.preventDefault();
-        setStatus({ loading: true, error: false });
 
         try {
             const user = await mutation.mutateAsync();
+            queryClient.setQueryData('user', user); // set user into the cache, and prevent stale tieme of 30 secons
             console.log('signed in:', user);
             router.push('/');
         } catch (error) {
