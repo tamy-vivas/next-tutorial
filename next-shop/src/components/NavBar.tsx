@@ -1,21 +1,11 @@
 import Link from 'next/link'
-import { useQuery } from 'react-query';
 import { fetchJson } from '../lib/api';
+import useUser from '../hooks/useUser';
 
 const NavBar: React.FC = () => {
 
-    const query = useQuery('user', async () => {
-        try {
-            return await fetchJson('/api/user');
-        } catch (error) {
-            return undefined;
-        }
-    }, {
-        cacheTime: Infinity, // keep cache data forever
-        staleTime: 30_000 //ms data is old after this value and will expire
-    });
+    const user = useUser();
 
-    const user = query.data;
 
     const handleSignOut = async () => {
         await fetchJson('/api/logout');
